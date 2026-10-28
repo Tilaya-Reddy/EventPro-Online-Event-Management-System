@@ -14,7 +14,7 @@ A database-driven event management web app built with **PHP 8, MySQL (PDO), sess
 
 ## Security
 
-| Threat | Protection |
+| Threat - Protection |
 
 | SQL injection - Every query uses PDO prepared statements (emulated prepares off) |
 
