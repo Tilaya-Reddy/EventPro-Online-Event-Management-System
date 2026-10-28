@@ -17,20 +17,31 @@ A database-driven event management web app built with **PHP 8, MySQL (PDO), sess
 | Threat | Protection |
 
 | SQL injection - Every query uses PDO prepared statements (emulated prepares off) |
+
 | XSS - All output escaped via `e()` (`htmlspecialchars`); live search uses `textContent`, never `innerHTML` |
+
 | CSRF - Random token on every form, verified with `hash_equals()` |
+
 | Weak auth - `password_hash()` / `password_verify()`, identical error for unknown email and wrong password, 60-second lock-out after 5 failed attempts |
+
 | Password reset - 256-bit random token, only its SHA-256 hash stored, 30-minute expiry, single use |
+
 | Bad input - Validated in JavaScript (convenience) **and** PHP (real protection) |
+
 | Malicious uploads - 2 MB limit, `finfo` MIME check, `getimagesize()`, random file names, `.htaccess` blocks PHP execution in `uploads/` |
+
 | Broken access control - `require_login()` on private pages; events editable only by their owner (`WHERE id = ? AND user_id = ?`); messages always use the session user id |
+
 | Session hijacking - HttpOnly + SameSite cookies, ID regenerated on login, 30-minute idle timeout |
 
 ## Requirements
 
 | Software & Version |
+
 | PHP - 8.0+ with `pdo_mysql`, `mbstring`, `fileinfo` (all on by default in XAMPP/WAMP) |
+
 | MySQL / MariaDB - 5.7+ / 10.3+ |
+
 | Web server - Apache (XAMPP / WAMP / MAMP) |
 
 ## Installation (XAMPP)
@@ -77,12 +88,15 @@ eventpro/
 ## Troubleshooting
 
 | Problem - The Solution |
-|
+
 | "Database connection failed" -  Start MySQL, then check `includes/config.php` |
+
 | Picture won't upload - Make `uploads/avatars/` writable; use a JPG/PNG/WEBP under 2 MB |
+
 | Times are a few hours off - Change `date_default_timezone_set` in `includes/config.php` |
+
 | Blank white page - Check the Apache/PHP error log (errors are logged, not displayed) |
 
-## 📄 Licence
+## Licence
 
 Student project, shared for learning and portfolio purposes.
